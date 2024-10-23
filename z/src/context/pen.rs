@@ -211,8 +211,8 @@ impl Pen
         params : DrawTexture2D
     )
     {
-        if params.flip.x { center_coef.x = 1. - center_coef.x; }
-        if params.flip.y { center_coef.y = 1. - center_coef.y; }
+        //if params.flip.x { center_coef.x = 1. - center_coef.x; }
+        //if params.flip.y { center_coef.y = 1. - center_coef.y; }
 
         pos -= center_coef * size;
 

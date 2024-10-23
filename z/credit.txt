@@ -1,0 +1,2 @@
+
+Load a gif in macroquad : MIT https://docs.rs/quad-gif/latest/quad_gif/

@@ -2,26 +2,25 @@ use macroquad::telemetry::sample_gpu_queries;
 
 use crate::*;
 
-#[derive(Clone, Debug)]
-pub struct Image<Meta:Clone=()>
+#[derive(Clone, Debug, Deref, DerefMut)]
+pub struct Image
 {
     pub(crate) img : LibImage,
-    pub meta : Meta,
 }
 
 impl From<LibImage> for Image
 {
     fn from(value: LibImage) -> Self {
-        Self { img: value, meta : () }
+        Self { img: value }
     }
 }
 
-impl<Meta : Clone> Image<Meta>
+impl Image
 {
-    pub fn from_texture(texture : &Texture2D<Meta>) -> Self { Self { img: texture.val.get_texture_data(), meta : texture.meta.clone() } }
+    pub fn from_texture(texture : &Texture2D) -> Self { Self { img: texture.val.get_texture_data() } }
 
-    pub fn new_transparent(size : Point2, meta : Meta) -> Self { Self::new(size, ColorBits::TRANSPARENT, meta) }
-    pub fn new(size : Point2, color : ColorBits, meta : Meta) -> Self
+    pub fn new_transparent(size : Point2) -> Self { Self::new(size, ColorBits::TRANSPARENT) }
+    pub fn new(size : Point2, color : ColorBits) -> Self
     {
         let val : [u8; 4] = color.into();
         let area = size.area();
@@ -43,17 +42,16 @@ impl<Meta : Clone> Image<Meta>
                 width: size.x as u16,
                 height: size.y as u16,
             },
-            meta,
         }
     }
 
     pub fn size  (&self) -> Point2 { point2(self.img.width as int, self.img.height as int)}
-    pub fn width (&self) -> isize  { self.size().x }
-    pub fn height(&self) -> isize  { self.size().y }
+    pub fn width (&self) -> int  { self.size().x }
+    pub fn height(&self) -> int  { self.size().y }
 
     pub fn sub_image(&self, rect : Rect2i) -> Self
     {
-        Self { img : self.img.sub_image(rect.to_float().to_lib()), meta : self.meta.clone() }
+        Self { img : self.img.sub_image(rect.to_float().to_lib()) }
     }
 
     pub fn get_color(&self, pos : Point2) -> Color
@@ -76,5 +74,15 @@ impl<Meta : Clone> Image<Meta>
 
     pub fn save_as_png(&self, path : &str) { self.img.export_png(path); }
 
-    pub fn to_texture2d(self) -> Texture2D<Meta> { Texture2D::new(LibTexture2D::from_image(&self.img), self.meta) }
+    pub fn to_texture2d(self) -> Texture2D { Texture2D::new(LibTexture2D::from_image(&self.img)) }
+}
+
+impl ImportFromRaw for Image
+{
+    type ImportRawError=macroquad::Error;
+
+    fn from_raw(raw : &[u8]) -> Result<Self, Self::ImportRawError> 
+    {
+        macroquad::texture::Image::from_file_with_format(raw, None).map(|v| Image { img: v })
+    }
 }

@@ -9,8 +9,15 @@ edition = "2021"
 math = { path = "../math" }
 util = { path = "../util" }
 
+# base game framework
 macroquad = { version = "0.4.8", features = ["audio"] }
 macroquad_macro = "0.1.8"
+
+# to read gif
+gif = "0.11.4"
+gif-dispose = "3.1.1"
+rgb = "0.8.34"
+
 # quad-timestamp = "=0.1.2"
 
 engine_macro = { path = "../engine_macro" }

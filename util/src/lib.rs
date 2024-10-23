@@ -37,10 +37,10 @@ pub use std::{collections::{HashMap, HashSet, VecDeque, BinaryHeap}, default, ma
 pub use std::hash::Hash;
 pub use std::mem;
 
-#[macro_use(Deref, DerefMut)]
+#[macro_use(Deref, DerefMut, Index, IndexMut)]
 pub extern crate derive_more;
 
-pub use derive_more::{Deref, DerefMut};
+pub use derive_more::{Deref, DerefMut, Index as Indexable, IndexMut as IndexableMut};
 
 pub mod langage_extension;
 pub use langage_extension::*;

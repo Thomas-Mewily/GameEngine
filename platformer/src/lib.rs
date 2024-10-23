@@ -3,7 +3,7 @@
 #![allow(unused_variables)]
 
 use math::*;
-use derive_more::{Deref,DerefMut};
+use derive_more::{Deref,DerefMut,Index,IndexMut};
 use util::*;
 
 pub mod game;

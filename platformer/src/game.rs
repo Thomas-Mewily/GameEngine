@@ -66,7 +66,7 @@ impl Game
     pub fn add(&mut self, e : Entity) -> EntityID { self.entities.push(e); self.entities.len() - 1 }
     
     pub fn iter_entity_id(&self) -> impl Iterator<Item = EntityID> { 0..self.entities.len() }
-    pub fn update(&mut self)
+    pub fn update(&mut self, dt : DeltaTime)
     {
         for e in self.iter_entity_id()
         {

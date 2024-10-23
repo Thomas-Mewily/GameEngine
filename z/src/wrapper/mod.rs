@@ -52,3 +52,6 @@ pub use font_wrapper::*;
 
 pub mod icon;
 pub use icon::*;
+
+pub mod animation;
+pub use animation::*;
