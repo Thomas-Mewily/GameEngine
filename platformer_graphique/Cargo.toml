@@ -1,0 +1,11 @@
+[package]
+name = "platformer_graphique"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+#math = { path = "../math" }
+#util = { path = "../util" }
+platformer = { path = "../platformer" }
+engine = { path = "../engine" }
+derive_more = { version = "1", features = ["full"] }

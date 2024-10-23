@@ -1,0 +1,98 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Medieval 👑♞♙</title>
+    <link rel="icon" type="image/x-icon" href="/web/favicon.ico">
+
+    <style>
+        html{ background-color: black; }
+        body,
+        canvas {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            background: rgb(0, 0, 0);
+            z-index: 0;
+        }
+
+        /* Full-screen black overlay */
+        #black-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            z-index: 9999; /* Ensure it is on top */
+        }
+
+        /* Fade-out effect for the black screen */
+        .fade-out {
+            animation: fadeOut 1s forwards;
+        }
+
+        /* CSS animation for fading out */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+    Chess Game by Mewily
+    -->
+
+    <canvas id="glcanvas" tabindex='1'></canvas>
+    
+    <script src="web/miniquad.js"></script>
+
+    <!-- 
+        <script src="https://not-fl3.github.io/miniquad-samples/mq_js_bundle.js"></script>
+        The following tag is the download version of this one ^^
+        When updating macroquad, also update the file
+    -->
+
+    <script src="web/quad-timestamp.js"></script>
+
+    <!-- <div id="black-screen"></div> -->
+
+    <script>
+
+        window.onload = function () {
+            setTimeout(function() {
+                document.getElementById("body").style.display = "";        
+            }, 2000);
+        }
+        /*
+        // Function to remove the black screen after 1 second
+        window.onload = function() {
+            setTimeout(() => {
+                const blackScreen = document.getElementById('black-screen');
+                blackScreen.classList.add('fade-out');
+            }, 100); // 1 second delay
+        };*/
+
+        // Optionally, hide the canvas initially until the game is ready
+        //const canvas = document.getElementById('glcanvas');
+        //canvas.style.display = 'none'; // Hide the canvas
+
+        // When the WebAssembly app is ready, show the canvas
+        load("target/wasm32-unknown-unknown/debug/atom_front.wasm").then(() => {
+            canvas.style.display = 'block'; // Show the canvas
+        });
+
+        //load("target/wasm32-unknown-unknown/release/atom_front.wasm");
+    </script>
+</body>
+</html>

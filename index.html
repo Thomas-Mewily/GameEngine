@@ -1,0 +1,38 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Medieval 👑♞♙</title>
+    <link rel="icon" type="image/x-icon" href="/web/favicon.ico">
+
+    <style>
+        html,
+        body,
+        canvas {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            background: rgb(0, 0, 0);
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Game by Mewily -->
+    <canvas id="glcanvas" tabindex='1'></canvas>
+    <!-- 
+        <script src="https://not-fl3.github.io/miniquad-samples/mq_js_bundle.js"></script>
+        The following tag is the download version of this one ^^
+        When updating macroquad, also update the file
+    -->
+    <script src="web/miniquad.js"></script>
+
+    <!-- macroquad extension to have the time on the web -->
+    <script src="web/quad-timestamp.js"></script>
+    <script> load("target/wasm32-unknown-unknown/debug/platformer_graphique.wasm"); </script>
+</body>
+</html>
